@@ -5,6 +5,8 @@
 ########################################
 # 環境変数
 export LANG=ja_JP.UTF-8
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 #for zsh-completions 
 fpath=(/usr/local/share/zsh-completions $fpath)
@@ -164,3 +166,18 @@ case ${OSTYPE} in
 esac
  
 # vim:set ft=zsh:
+
+# ========================================================================
+# PATH
+# ------------------------------------------------------------------------
+# anyenv
+# ------------------------------------------------------------------------
+if [ -d ${HOME}/.anyenv ] ; then
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+    for D in `ls $HOME/.anyenv/envs`
+    do
+        export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
+    done
+
+fi
